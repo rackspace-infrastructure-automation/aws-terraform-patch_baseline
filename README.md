@@ -1,34 +1,41 @@
 # aws-terraform-patch_baseline
-This module creates a Systems Manager patch baseline for the specified Operating System.
+
+This module creates a patch baseline for a specific os.
 
 ## Basic Usage
-```
-module "patch_baseline_ubuntu" {
-  source             = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.1"
-  approve_after_days = "3"
-  approved_patches   = []
 
-  baseline_name = "CircleCI-Test-Baseline-Ubuntu-${random_string.r_string.result}"
+```
+module "patch_baseline_amazon_linux" {
+ source             = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.1"
+ approve_after_days = "3"
+ approved_patches   = []
+
+  baseline_name = "CircleCI-Test-Baseline-AmazonLinux-${random_string.r_string.result}"
 
   description = "Patch Baseline Test - Created with Terraform"
 
   enable_exclusions = true
-  excluded_key      = "PRIORITY"
-  excluded_values   = ["Extra"]
+  excluded_key      = "CLASSIFICATION"
+  excluded_values   = ["Newpackage"]
 
-  operating_system = "UBUNTU"
-  product_values   = ["Ubuntu16.04"]
+  operating_system = "AMAZON_LINUX"
+  product_values   = ["AmazonLinux2017.09"]
 
   rejected_patches                  = []
   compliance_level                  = "CRITICAL"
   approved_patches_compliance_level = "CRITICAL"
-  priority_values                   = ["Required"]
 
-  section_values = [
-    "All",
+  classification_values = [
+    "Security",
+  ]
+
+  severity_values = [
+    "Critical",
   ]
 }
 ```
+
+Full working references are available at [examples](examples)
 
 ## Inputs
 
