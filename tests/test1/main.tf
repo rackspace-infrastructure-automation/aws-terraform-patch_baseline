@@ -144,19 +144,3 @@ module "patch_baseline_windows" {
     "Critical",
   ]
 }
-
-output "patch_baseline_centos_id" {
-  value = "${module.patch_baseline_centos.patch_baseline_id}"
-}
-
-output "patch_baseline_rhel_id" {
-  value = "${module.patch_baseline_centos.patch_baseline_id}"
-}
-
-output "patch_baseline_ubuntu_id" {
-  value = "${module.patch_baseline_centos.patch_baseline_id}"
-}
-
-output "patch_baseline_windows_id" {
-  value = "${module.patch_baseline_centos.patch_baseline_id}"
-}
