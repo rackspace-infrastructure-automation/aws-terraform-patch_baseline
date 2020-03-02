@@ -1,17 +1,17 @@
-/**
+/*
  * # aws-terraform-patch_baseline
  *
- *This module creates a Systems Manager patch baseline for the specified Operating System.
+ * This module creates a Systems Manager patch baseline for the specified Operating System.
  *
- *## Basic Usage
+ * ## Basic Usage
  *
- *```
- *module "patch_baseline_amazon_linux" {
- *  source             = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.1"
- *  approve_after_days = "3"
- *  approved_patches   = []
+ * ```
+ * module "patch_baseline_amazon_linux" {
+ *   source             = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.1"
+ *   approve_after_days = "3"
+ *   approved_patches   = []
  *
- *   baseline_name = "CircleCI-Test-Baseline-AmazonLinux-${random_string.r_string.result}"
+ *   name = "CircleCI-Test-Baseline-AmazonLinux-${random_string.r_string.result}"
  *
  *   description = "Patch Baseline Test - Created with Terraform"
  *
@@ -33,8 +33,8 @@
  *   severity_values = [
  *     "Critical",
  *   ]
- * }
- *```
+ *  }
+ * ```
  *
  * Full working references are available at [examples](examples)
  */
