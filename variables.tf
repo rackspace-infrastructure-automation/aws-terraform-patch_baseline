@@ -17,7 +17,7 @@ variable "approved_patches_compliance_level" {
 }
 
 variable "baseline_name" {
-  description = "A name for the patch baseline"
+  description = "A name for the patch baseline. [**Deprecated** in favor of `name`]. It will be removed in future releases. `name` supercedes `baseline_name` when both are set."
   default     = "Custom-Patch-Baseline"
   type        = "string"
 }
@@ -62,6 +62,12 @@ variable "msrc_severity_values" {
   description = "[WINDOWS only] Install patches that match the selected severity level of the selected values. Valid values are: Critical, Important, Moderate, Low, Unspecified."
   default     = ["Critical"]
   type        = "list"
+}
+
+variable "name" {
+  description = "A name for the patch baseline"
+  default     = "Custom-Patch-Baseline"
+  type        = "string"
 }
 
 variable "operating_system" {

@@ -37,6 +37,16 @@ module "patch_baseline_amazon_linux" {
 
 Full working references are available at [examples](examples)
 
+## Module variables
+
+The following module variables changes have occurred:
+
+#### Deprecations
+- `baseline_name`  - marked for deprecation as it no longer meets our standards.
+
+#### Additions
+- `name` - introduced as a replacement for `baseline_name` to better align with our standards.
+
 ## Providers
 
 | Name | Version |
@@ -50,7 +60,7 @@ Full working references are available at [examples](examples)
 | approve\_after\_days | The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Max value 100. | `string` | `3` | no |
 | approved\_patches | A list of explicitly approved patches for the baseline. | `list` | `[]` | no |
 | approved\_patches\_compliance\_level | The compliance level for optional approved patches. This means that if an optional approved patch is reported as missing, this is the severity of the compliance violation. Valid Values can be found here: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreatePatchBaseline.html#systemsmanager-CreatePatchBaseline-request-ApprovedPatchesComplianceLevel | `string` | `"CRITICAL"` | no |
-| baseline\_name | A name for the patch baseline | `string` | `"Custom-Patch-Baseline"` | no |
+| baseline\_name | A name for the patch baseline. [**Deprecated** in favor of `name`]. It will be removed in future releases. `name` supercedes `baseline_name` when both are set. | `string` | `"Custom-Patch-Baseline"` | no |
 | classification\_values | Install patches that match the selected CLASSIFICATION (applies to NON-UBUNTU OS). Please see https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html for valid CLASSIFICATION values per OS type. | `list` | `[]` | no |
 | compliance\_level | If patches are missing AWS will consider this a ______ problem, and alert accordingly. Valid values can be found here: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchRule.html#systemsmanager-Type-PatchRule-ComplianceLevel | `string` | `"CRITICAL"` | no |
 | description | Patch baseline description | `string` | `"Created with Terraform"` | no |
@@ -58,6 +68,7 @@ Full working references are available at [examples](examples)
 | excluded\_key | The key for the filter. Valid keys per OS can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html | `string` | `""` | no |
 | excluded\_values | List values for the filter key. Valid values per exclusion key can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html | `list` | `[]` | no |
 | msrc\_severity\_values | [WINDOWS only] Install patches that match the selected severity level of the selected values. Valid values are: Critical, Important, Moderate, Low, Unspecified. | `list` | <pre>[<br>  "Critical"<br>]</pre> | no |
+| name | A name for the patch baseline | `string` | `"Custom-Patch-Baseline"` | no |
 | operating\_system | Defines the operating system the patch baseline applies to. | `string` | `""` | no |
 | priority\_values | [UBUNTU only] Install patches that match the priority level of the selected value. Valid values are Required, Important, Standard, Optional, Extra. | `list` | `[]` | no |
 | product\_values | Specified product value for the specified OS. Valid lists per OS type can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html | `list` | n/a | yes |

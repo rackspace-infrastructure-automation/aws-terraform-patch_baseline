@@ -37,8 +37,21 @@
  * ```
  *
  * Full working references are available at [examples](examples)
+ *
+* ## Module variables
+ *
+ * The following module variables changes have occurred:
+ *
+ * #### Deprecations
+ * - `baseline_name`  - marked for deprecation as it no longer meets our standards.
+ *
+ * #### Additions
+ * - `name` - introduced as a replacement for `baseline_name` to better align with our standards.
  */
 locals {
+  # favor name over baseline_name if both are set
+  name = "${var.name != "" ? var.name : var.baseline_name}"
+
   patch_filter_one_key_list = {
     WINDOWS                 = "CLASSIFICATION"
     AMAZON_LINUX            = "CLASSIFICATION"
@@ -78,7 +91,7 @@ locals {
 
 resource "aws_ssm_patch_baseline" "patch_baseline_with_exclusion" {
   count                             = "${var.enable_exclusions ? 1 : 0}"
-  name                              = "${var.baseline_name}"
+  name                              = "${local.name}"
   description                       = "${var.description}"
   operating_system                  = "${var.operating_system}"
   approved_patches_compliance_level = "${var.approved_patches_compliance_level}"
@@ -114,7 +127,7 @@ resource "aws_ssm_patch_baseline" "patch_baseline_with_exclusion" {
 
 resource "aws_ssm_patch_baseline" "patch_baseline_no_exclusion" {
   count                             = "${var.enable_exclusions ? 0 : 1}"
-  name                              = "${var.baseline_name}"
+  name                              = "${local.name}"
   description                       = "${var.description}"
   operating_system                  = "${var.operating_system}"
   approved_patches_compliance_level = "${var.approved_patches_compliance_level}"
