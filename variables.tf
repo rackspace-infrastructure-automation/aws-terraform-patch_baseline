@@ -76,14 +76,14 @@ variable "operating_system" {
   type        = "string"
 }
 
-variable "product_values" {
-  description = "Specified product value for the specified OS. Valid lists per OS type can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html"
-  type        = "list"
-}
-
 variable "priority_values" {
   description = "[UBUNTU only] Install patches that match the priority level of the selected value. Valid values are Required, Important, Standard, Optional, Extra."
   default     = []
+  type        = "list"
+}
+
+variable "product_values" {
+  description = "Specified product value for the specified OS. Valid lists per OS type can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html"
   type        = "list"
 }
 
