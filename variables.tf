@@ -17,7 +17,7 @@ variable "approved_patches_compliance_level" {
 }
 
 variable "baseline_name" {
-  description = "A name for the patch baseline"
+  description = "A name for the patch baseline. [**Deprecated** in favor of `name`]. It will be removed in future releases. `name` supercedes `baseline_name` when both are set."
   default     = "Custom-Patch-Baseline"
   type        = "string"
 }
@@ -64,20 +64,26 @@ variable "msrc_severity_values" {
   type        = "list"
 }
 
+variable "name" {
+  description = "A name for the patch baseline"
+  default     = "Custom-Patch-Baseline"
+  type        = "string"
+}
+
 variable "operating_system" {
   description = "Defines the operating system the patch baseline applies to."
   default     = ""
   type        = "string"
 }
 
-variable "product_values" {
-  description = "Specified product value for the specified OS. Valid lists per OS type can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html"
-  type        = "list"
-}
-
 variable "priority_values" {
   description = "[UBUNTU only] Install patches that match the priority level of the selected value. Valid values are Required, Important, Standard, Optional, Extra."
   default     = []
+  type        = "list"
+}
+
+variable "product_values" {
+  description = "Specified product value for the specified OS. Valid lists per OS type can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html"
   type        = "list"
 }
 
