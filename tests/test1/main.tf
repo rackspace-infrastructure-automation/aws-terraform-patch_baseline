@@ -12,23 +12,20 @@ resource "random_string" "r_string" {
 }
 
 module "patch_baseline_amazon_linux" {
-  source             = "../../module"
-  approve_after_days = "3"
-  approved_patches   = []
+  source = "../../module"
 
-  description = "Patch Baseline Test - Created with Terraform"
-
-  enable_exclusions = true
-  excluded_key      = "CLASSIFICATION"
-  excluded_values   = ["Newpackage"]
-
-  name             = "CircleCI-Test-Baseline-AmazonLinux-${random_string.r_string.result}"
-  operating_system = "AMAZON_LINUX"
-  product_values   = ["AmazonLinux2017.09"]
-
-  rejected_patches                  = []
-  compliance_level                  = "CRITICAL"
+  approve_after_days                = "3"
+  approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
+  compliance_level                  = "CRITICAL"
+  description                       = "Patch Baseline Test - Created with Terraform"
+  enable_exclusions                 = true
+  excluded_key                      = "CLASSIFICATION"
+  excluded_values                   = ["Newpackage"]
+  name                              = "CircleCI-Test-Baseline-AmazonLinux-${random_string.r_string.result}"
+  operating_system                  = "AMAZON_LINUX"
+  product_values                    = ["AmazonLinux2017.09"]
+  rejected_patches                  = []
 
   classification_values = [
     "Security",
@@ -40,21 +37,18 @@ module "patch_baseline_amazon_linux" {
 }
 
 module "patch_baseline_centos" {
-  source             = "../../module"
-  approve_after_days = "3"
-  approved_patches   = []
+  source = "../../module"
 
-  description = "Patch Baseline Test - Created with Terraform"
-
-  enable_exclusions = false
-
-  name             = "CircleCI-Test-Baseline-Centos-${random_string.r_string.result}"
-  operating_system = "CENTOS"
-  product_values   = ["CentOS7.5"]
-
-  rejected_patches                  = []
-  compliance_level                  = "CRITICAL"
+  approve_after_days                = "3"
+  approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
+  compliance_level                  = "CRITICAL"
+  description                       = "Patch Baseline Test - Created with Terraform"
+  enable_exclusions                 = false
+  name                              = "CircleCI-Test-Baseline-Centos-${random_string.r_string.result}"
+  operating_system                  = "CENTOS"
+  product_values                    = ["CentOS7.5"]
+  rejected_patches                  = []
 
   classification_values = [
     "Security",
@@ -66,20 +60,18 @@ module "patch_baseline_centos" {
 }
 
 module "patch_baseline_rhel" {
-  source             = "../../module"
-  approve_after_days = "3"
-  approved_patches   = []
+  source = "../../module"
 
-  description = "Patch Baseline Test - Created with Terraform"
-
-  enable_exclusions = false
-
+  approve_after_days                = "3"
+  approved_patches                  = []
+  approved_patches_compliance_level = "CRITICAL"
+  compliance_level                  = "CRITICAL"
+  description                       = "Patch Baseline Test - Created with Terraform"
+  enable_exclusions                 = false
   name                              = "CircleCI-Test-Baseline-Rhel-${random_string.r_string.result}"
   operating_system                  = "REDHAT_ENTERPRISE_LINUX"
   product_values                    = ["RedhatEnterpriseLinux7.3"]
   rejected_patches                  = []
-  compliance_level                  = "CRITICAL"
-  approved_patches_compliance_level = "CRITICAL"
 
   classification_values = [
     "Security",
@@ -91,24 +83,22 @@ module "patch_baseline_rhel" {
 }
 
 module "patch_baseline_ubuntu" {
-  source             = "../../module"
-  approve_after_days = "3"
-  approved_patches   = []
+  source = "../../module"
 
-  description = "Patch Baseline Test - Created with Terraform"
-
-  enable_exclusions = true
-  excluded_key      = "PRIORITY"
-  excluded_values   = ["Extra"]
+  approve_after_days                = "3"
+  approved_patches                  = []
+  approved_patches_compliance_level = "CRITICAL"
+  compliance_level                  = "CRITICAL"
+  description                       = "Patch Baseline Test - Created with Terraform"
+  enable_exclusions                 = true
+  excluded_key                      = "PRIORITY"
+  excluded_values                   = ["Extra"]
 
   name             = "CircleCI-Test-Baseline-Ubuntu-${random_string.r_string.result}"
   operating_system = "UBUNTU"
   product_values   = ["Ubuntu16.04"]
-
-  rejected_patches                  = []
-  compliance_level                  = "CRITICAL"
-  approved_patches_compliance_level = "CRITICAL"
-  priority_values                   = ["Required"]
+  priority_values  = ["Required"]
+  rejected_patches = []
 
   section_values = [
     "All",
@@ -116,21 +106,18 @@ module "patch_baseline_ubuntu" {
 }
 
 module "patch_baseline_windows" {
-  source             = "../../module"
-  approve_after_days = "3"
-  approved_patches   = []
+  source = "../../module"
 
-  description = "Patch Baseline Test - Created with Terraform"
-
-  enable_exclusions = false
-
-  name             = "CircleCI-Test-Baseline-Windows-${random_string.r_string.result}"
-  operating_system = "WINDOWS"
-  product_values   = ["WindowsServer2016"]
-
-  rejected_patches                  = []
-  compliance_level                  = "CRITICAL"
+  approve_after_days                = "3"
+  approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
+  compliance_level                  = "CRITICAL"
+  description                       = "Patch Baseline Test - Created with Terraform"
+  enable_exclusions                 = false
+  name                              = "CircleCI-Test-Baseline-Windows-${random_string.r_string.result}"
+  operating_system                  = "WINDOWS"
+  product_values                    = ["WindowsServer2016"]
+  rejected_patches                  = []
 
   classification_values = [
     "CriticalUpdates",
