@@ -11,7 +11,7 @@ resource "random_string" "r_string" {
 }
 
 module "patch_baseline_amazon_linux" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
   approve_after_days                = "3"
   approved_patches                  = []
@@ -36,7 +36,7 @@ module "patch_baseline_amazon_linux" {
 }
 
 module "patch_baseline_centos" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
   approve_after_days                = "3"
   approved_patches                  = []
@@ -59,7 +59,7 @@ module "patch_baseline_centos" {
 }
 
 module "patch_baseline_rhel" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
   approve_after_days                = "3"
   approved_patches                  = []
@@ -82,7 +82,7 @@ module "patch_baseline_rhel" {
 }
 
 module "patch_baseline_ubuntu" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
   approve_after_days                = "3"
   approved_patches                  = []
@@ -104,7 +104,7 @@ module "patch_baseline_ubuntu" {
 }
 
 module "patch_baseline_windows" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
   approve_after_days                = "3"
   approved_patches                  = []
