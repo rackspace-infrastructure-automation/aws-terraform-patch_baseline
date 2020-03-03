@@ -6,7 +6,7 @@ This module creates a Systems Manager patch baseline for the specified Operating
 
 ```
 module "patch_baseline_amazon_linux" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.1"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.0.2"
 
   approve_after_days                = "3"
   approved_patches                  = []
