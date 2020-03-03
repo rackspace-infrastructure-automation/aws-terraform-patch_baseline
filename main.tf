@@ -44,9 +44,14 @@
  * #### Additions
  * - `name` - introduced as a replacement for `baseline_name` to better align with our standards.
  */
+
+terraform {
+  required_version = ">= 0.12"
+}
+
 locals {
   # favor name over baseline_name if both are set
-  name = "${var.name != "" ? var.name : var.baseline_name}"
+  name = var.name != "" ? var.name : var.baseline_name
 
   patch_filter_one_key_list = {
     WINDOWS                 = "CLASSIFICATION"
@@ -66,88 +71,121 @@ locals {
     REDHAT_ENTERPRISE_LINUX = "SEVERITY"
   }
 
-  patch_filter_one_key = "${local.patch_filter_one_key_list[var.operating_system]}"
-  patch_filter_two_key = "${local.patch_filter_two_key_list[var.operating_system]}"
+  patch_filter_one_key = local.patch_filter_one_key_list[var.operating_system]
+  patch_filter_two_key = local.patch_filter_two_key_list[var.operating_system]
 
   patch_filter_one_value_list = {
-    CLASSIFICATION = ["${var.classification_values}"]
-    SECTION        = ["${var.section_values}"]
+    CLASSIFICATION = [var.classification_values]
+    SECTION        = [var.section_values]
   }
 
-  patch_filter_one_chosen_value = "${local.patch_filter_one_value_list[local.patch_filter_one_key]}"
+  patch_filter_one_chosen_value = local.patch_filter_one_value_list[local.patch_filter_one_key]
 
   patch_filter_two_value_list = {
-    MSRC_SEVERITY = ["${var.msrc_severity_values}"]
-    SEVERITY      = ["${var.severity_values}"]
-    PRIORITY      = ["${var.priority_values}"]
+    MSRC_SEVERITY = [var.msrc_severity_values]
+    SEVERITY      = [var.severity_values]
+    PRIORITY      = [var.priority_values]
   }
 
-  patch_filter_two_chosen_value = "${local.patch_filter_two_value_list[local.patch_filter_two_key]}"
+  patch_filter_two_chosen_value = local.patch_filter_two_value_list[local.patch_filter_two_key]
 }
 
 resource "aws_ssm_patch_baseline" "patch_baseline_with_exclusion" {
-  count = "${var.enable_exclusions ? 1 : 0}"
+  count = var.enable_exclusions ? 1 : 0
 
-  approved_patches                  = ["${var.approved_patches}"]
-  approved_patches_compliance_level = "${var.approved_patches_compliance_level}"
-  description                       = "${var.description}"
-  name                              = "${local.name}"
-  operating_system                  = "${var.operating_system}"
-  rejected_patches                  = ["${var.rejected_patches}"]
+  approved_patches                  = var.approved_patches
+  approved_patches_compliance_level = var.approved_patches_compliance_level
+  description                       = var.description
+  name                              = local.name
+  operating_system                  = var.operating_system
+  rejected_patches                  = var.rejected_patches
 
   approval_rule {
-    approve_after_days = "${var.approve_after_days}"
-    compliance_level   = "${var.compliance_level}"
+    approve_after_days = var.approve_after_days
+    compliance_level   = var.compliance_level
 
     patch_filter {
-      key    = "${local.patch_filter_one_key_list[var.operating_system]}"
-      values = ["${local.patch_filter_one_chosen_value}"]
+      key = local.patch_filter_one_key_list[var.operating_system]
+      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
+      # force an interpolation expression to be interpreted as a list by wrapping it
+      # in an extra set of list brackets. That form was supported for compatibility in
+      # v0.11, but is no longer supported in Terraform v0.12.
+      #
+      # If the expression in the following list itself returns a list, remove the
+      # brackets to avoid interpretation as a list of lists. If the expression
+      # returns a single list item then leave it as-is and remove this TODO comment.
+      values = [local.patch_filter_one_chosen_value]
     }
 
     patch_filter {
-      key    = "${local.patch_filter_two_key_list[var.operating_system]}"
-      values = ["${local.patch_filter_two_chosen_value}"]
+      key = local.patch_filter_two_key_list[var.operating_system]
+      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
+      # force an interpolation expression to be interpreted as a list by wrapping it
+      # in an extra set of list brackets. That form was supported for compatibility in
+      # v0.11, but is no longer supported in Terraform v0.12.
+      #
+      # If the expression in the following list itself returns a list, remove the
+      # brackets to avoid interpretation as a list of lists. If the expression
+      # returns a single list item then leave it as-is and remove this TODO comment.
+      values = [local.patch_filter_two_chosen_value]
     }
 
     patch_filter {
       key    = "PRODUCT"
-      values = ["${var.product_values}"]
+      values = var.product_values
     }
   }
 
   global_filter {
-    key    = "${var.excluded_key}"
-    values = ["${var.excluded_values}"]
+    key    = var.excluded_key
+    values = var.excluded_values
   }
 }
 
 resource "aws_ssm_patch_baseline" "patch_baseline_no_exclusion" {
-  count = "${var.enable_exclusions ? 0 : 1}"
+  count = var.enable_exclusions ? 0 : 1
 
-  approved_patches_compliance_level = "${var.approved_patches_compliance_level}"
-  approved_patches                  = ["${var.approved_patches}"]
-  description                       = "${var.description}"
-  name                              = "${local.name}"
-  operating_system                  = "${var.operating_system}"
-  rejected_patches                  = ["${var.rejected_patches}"]
+  approved_patches_compliance_level = var.approved_patches_compliance_level
+  approved_patches                  = var.approved_patches
+  description                       = var.description
+  name                              = local.name
+  operating_system                  = var.operating_system
+  rejected_patches                  = var.rejected_patches
 
   approval_rule {
-    approve_after_days = "${var.approve_after_days}"
-    compliance_level   = "${var.compliance_level}"
+    approve_after_days = var.approve_after_days
+    compliance_level   = var.compliance_level
 
     patch_filter {
-      key    = "${local.patch_filter_one_key_list[var.operating_system]}"
-      values = ["${local.patch_filter_one_chosen_value}"]
+      key = local.patch_filter_one_key_list[var.operating_system]
+      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
+      # force an interpolation expression to be interpreted as a list by wrapping it
+      # in an extra set of list brackets. That form was supported for compatibility in
+      # v0.11, but is no longer supported in Terraform v0.12.
+      #
+      # If the expression in the following list itself returns a list, remove the
+      # brackets to avoid interpretation as a list of lists. If the expression
+      # returns a single list item then leave it as-is and remove this TODO comment.
+      values = [local.patch_filter_one_chosen_value]
     }
 
     patch_filter {
-      key    = "${local.patch_filter_two_key_list[var.operating_system]}"
-      values = ["${local.patch_filter_two_chosen_value}"]
+      key = local.patch_filter_two_key_list[var.operating_system]
+      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
+      # force an interpolation expression to be interpreted as a list by wrapping it
+      # in an extra set of list brackets. That form was supported for compatibility in
+      # v0.11, but is no longer supported in Terraform v0.12.
+      #
+      # If the expression in the following list itself returns a list, remove the
+      # brackets to avoid interpretation as a list of lists. If the expression
+      # returns a single list item then leave it as-is and remove this TODO comment.
+      values = [local.patch_filter_two_chosen_value]
     }
 
     patch_filter {
       key    = "PRODUCT"
-      values = ["${var.product_values}"]
+      values = var.product_values
     }
   }
 }
+
