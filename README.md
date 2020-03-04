@@ -47,7 +47,7 @@ The following module variables changes have occurred:
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | >= 2.7.0 |
 
 ## Inputs
 
