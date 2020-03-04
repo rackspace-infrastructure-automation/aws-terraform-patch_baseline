@@ -43,7 +43,7 @@ variable "description" {
 variable "enable_exclusions" {
   description = "Enable patch baseline global patch filters (exclusions). If set to true, excluded_key and excluded_values must be set."
   default     = false
-  type        = string
+  type        = bool
 }
 
 variable "excluded_key" {

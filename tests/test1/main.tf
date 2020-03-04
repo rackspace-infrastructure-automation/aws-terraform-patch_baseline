@@ -14,7 +14,7 @@ resource "random_string" "r_string" {
 module "patch_baseline_amazon_linux" {
   source = "../../module"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -39,7 +39,7 @@ module "patch_baseline_amazon_linux" {
 module "patch_baseline_centos" {
   source = "../../module"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -62,7 +62,7 @@ module "patch_baseline_centos" {
 module "patch_baseline_rhel" {
   source = "../../module"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -85,7 +85,7 @@ module "patch_baseline_rhel" {
 module "patch_baseline_ubuntu" {
   source = "../../module"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -108,7 +108,7 @@ module "patch_baseline_ubuntu" {
 module "patch_baseline_windows" {
   source = "../../module"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"

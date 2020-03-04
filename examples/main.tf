@@ -13,7 +13,7 @@ resource "random_string" "r_string" {
 module "patch_baseline_amazon_linux" {
   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -38,7 +38,7 @@ module "patch_baseline_amazon_linux" {
 module "patch_baseline_centos" {
   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -61,7 +61,7 @@ module "patch_baseline_centos" {
 module "patch_baseline_rhel" {
   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -84,7 +84,7 @@ module "patch_baseline_rhel" {
 module "patch_baseline_ubuntu" {
   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"
@@ -106,7 +106,7 @@ module "patch_baseline_ubuntu" {
 module "patch_baseline_windows" {
   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
 
-  approve_after_days                = "3"
+  approve_after_days                = 3
   approved_patches                  = []
   approved_patches_compliance_level = "CRITICAL"
   compliance_level                  = "CRITICAL"

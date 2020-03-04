@@ -9,7 +9,7 @@
  * module "patch_baseline_amazon_linux" {
  *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-patch_baseline.git?ref=v0.12.0"
  *
- *   approve_after_days                = "3"
+ *   approve_after_days                = 3
  *   approved_patches                  = []
 *   compliance_level                   = "CRITICAL"
  *   approved_patches_compliance_level = "CRITICAL"
@@ -75,16 +75,16 @@ locals {
   patch_filter_two_key = local.patch_filter_two_key_list[var.operating_system]
 
   patch_filter_one_value_list = {
-    CLASSIFICATION = [var.classification_values]
-    SECTION        = [var.section_values]
+    CLASSIFICATION = var.classification_values
+    SECTION        = var.section_values
   }
 
   patch_filter_one_chosen_value = local.patch_filter_one_value_list[local.patch_filter_one_key]
 
   patch_filter_two_value_list = {
-    MSRC_SEVERITY = [var.msrc_severity_values]
-    SEVERITY      = [var.severity_values]
-    PRIORITY      = [var.priority_values]
+    MSRC_SEVERITY = var.msrc_severity_values
+    SEVERITY      = var.severity_values
+    PRIORITY      = var.priority_values
   }
 
   patch_filter_two_chosen_value = local.patch_filter_two_value_list[local.patch_filter_two_key]
@@ -105,29 +105,13 @@ resource "aws_ssm_patch_baseline" "patch_baseline_with_exclusion" {
     compliance_level   = var.compliance_level
 
     patch_filter {
-      key = local.patch_filter_one_key_list[var.operating_system]
-      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-      # force an interpolation expression to be interpreted as a list by wrapping it
-      # in an extra set of list brackets. That form was supported for compatibility in
-      # v0.11, but is no longer supported in Terraform v0.12.
-      #
-      # If the expression in the following list itself returns a list, remove the
-      # brackets to avoid interpretation as a list of lists. If the expression
-      # returns a single list item then leave it as-is and remove this TODO comment.
-      values = [local.patch_filter_one_chosen_value]
+      key    = local.patch_filter_one_key_list[var.operating_system]
+      values = local.patch_filter_one_chosen_value
     }
 
     patch_filter {
-      key = local.patch_filter_two_key_list[var.operating_system]
-      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-      # force an interpolation expression to be interpreted as a list by wrapping it
-      # in an extra set of list brackets. That form was supported for compatibility in
-      # v0.11, but is no longer supported in Terraform v0.12.
-      #
-      # If the expression in the following list itself returns a list, remove the
-      # brackets to avoid interpretation as a list of lists. If the expression
-      # returns a single list item then leave it as-is and remove this TODO comment.
-      values = [local.patch_filter_two_chosen_value]
+      key    = local.patch_filter_two_key_list[var.operating_system]
+      values = local.patch_filter_two_chosen_value
     }
 
     patch_filter {
@@ -157,29 +141,13 @@ resource "aws_ssm_patch_baseline" "patch_baseline_no_exclusion" {
     compliance_level   = var.compliance_level
 
     patch_filter {
-      key = local.patch_filter_one_key_list[var.operating_system]
-      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-      # force an interpolation expression to be interpreted as a list by wrapping it
-      # in an extra set of list brackets. That form was supported for compatibility in
-      # v0.11, but is no longer supported in Terraform v0.12.
-      #
-      # If the expression in the following list itself returns a list, remove the
-      # brackets to avoid interpretation as a list of lists. If the expression
-      # returns a single list item then leave it as-is and remove this TODO comment.
-      values = [local.patch_filter_one_chosen_value]
+      key    = local.patch_filter_one_key_list[var.operating_system]
+      values = local.patch_filter_one_chosen_value
     }
 
     patch_filter {
-      key = local.patch_filter_two_key_list[var.operating_system]
-      # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-      # force an interpolation expression to be interpreted as a list by wrapping it
-      # in an extra set of list brackets. That form was supported for compatibility in
-      # v0.11, but is no longer supported in Terraform v0.12.
-      #
-      # If the expression in the following list itself returns a list, remove the
-      # brackets to avoid interpretation as a list of lists. If the expression
-      # returns a single list item then leave it as-is and remove this TODO comment.
-      values = [local.patch_filter_two_chosen_value]
+      key    = local.patch_filter_two_key_list[var.operating_system]
+      values = local.patch_filter_two_chosen_value
     }
 
     patch_filter {
