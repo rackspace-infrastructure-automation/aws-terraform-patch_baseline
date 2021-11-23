@@ -43,22 +43,36 @@ The following module variables changes have occurred:
 #### Additions
 - `name` - introduced as a replacement for `baseline_name` to better align with our standards.
 
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
 |------|---------|
 | aws | n/a |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_ssm_patch_baseline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_patch_baseline) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | approve\_after\_days | The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Max value 100. | `string` | `3` | no |
 | approved\_patches | A list of explicitly approved patches for the baseline. | `list` | `[]` | no |
 | approved\_patches\_compliance\_level | The compliance level for optional approved patches. This means that if an optional approved patch is reported as missing, this is the severity of the compliance violation. Valid Values can be found here: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreatePatchBaseline.html#systemsmanager-CreatePatchBaseline-request-ApprovedPatchesComplianceLevel | `string` | `"CRITICAL"` | no |
 | baseline\_name | A name for the patch baseline. [**Deprecated** in favor of `name`]. It will be removed in future releases. `name` supercedes `baseline_name` when both are set. | `string` | `"Custom-Patch-Baseline"` | no |
 | classification\_values | Install patches that match the selected CLASSIFICATION (applies to NON-UBUNTU OS). Please see https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html for valid CLASSIFICATION values per OS type. | `list` | `[]` | no |
-| compliance\_level | If patches are missing AWS will consider this a ______ problem, and alert accordingly. Valid values can be found here: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchRule.html#systemsmanager-Type-PatchRule-ComplianceLevel | `string` | `"CRITICAL"` | no |
+| compliance\_level | If patches are missing AWS will consider this a \_\_\_\_\_\_ problem, and alert accordingly. Valid values can be found here: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchRule.html#systemsmanager-Type-PatchRule-ComplianceLevel | `string` | `"CRITICAL"` | no |
 | description | Patch baseline description | `string` | `"Created with Terraform"` | no |
 | enable\_exclusions | Enable patch baseline global patch filters (exclusions). If set to true, excluded\_key and excluded\_values must be set. | `string` | `false` | no |
 | excluded\_key | The key for the filter. Valid keys per OS can be found in this documentation: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html | `string` | `""` | no |
@@ -77,4 +91,3 @@ The following module variables changes have occurred:
 | Name | Description |
 |------|-------------|
 | patch\_baseline\_id | The physical ID of the Patch Baseline |
-
