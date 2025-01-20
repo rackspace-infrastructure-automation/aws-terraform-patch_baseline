@@ -1,3 +1,7 @@
+> [!CAUTION]
+> This project is end of life. This repo will be removed on June 2nd 2025
+
+
 # aws-terraform-patch\_baseline
 
 This module creates a Systems Manager patch baseline for the specified Operating System.
